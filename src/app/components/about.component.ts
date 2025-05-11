@@ -21,13 +21,23 @@ type AboutType = {
   imports: [],
   template: `
     @if (aboutData.length > 0) {
-
-    <div>
-      <h2 class="text-amber-50 text-5xl">David Dyberg</h2>
-      <p class="text-amber-50 text-3xl">
-        I am a <span class="text-cyan-400">Fullstack Developer</span>
-      </p>
-      <p class="text-amber-50">{{ aboutData[0].bio }}</p>
+    <div class="flex-col gap-4 flex justify-between items-center sm:flex-row">
+      <div class="flex flex-col gap-2">
+        <h2 class="text-amber-50 text-5xl text-center">
+          {{ aboutData[0].firstName }} {{ aboutData[0].lastName }}
+        </h2>
+        <p class="text-amber-50 text-3xl text-center">
+          I am a <span class="text-cyan-400">Fullstack Developer</span>
+        </p>
+        <p class="text-amber-50 text-center">{{ aboutData[0].bio }}</p>
+      </div>
+      <div>
+        <img
+          class="rounded-full sm:w-xs sm:h-xs w-3xs"
+          src="https://media.licdn.com/dms/image/v2/D4D03AQEJ22lp8UIvow/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1718285883389?e=2147483647&v=beta&t=LRBayTE30MM64HDOI89fnzsK1ycsT77j1XWBeL6-rWM"
+          alt="Profila image"
+        />
+      </div>
     </div>
     } @else {
     <p class="text-amber-50">Loading...</p>
