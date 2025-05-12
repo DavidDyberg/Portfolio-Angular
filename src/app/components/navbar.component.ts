@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-navbar',
   imports: [RouterLink],
   template: `
-    <nav class="flex p-4 gap-2 text-amber-50 w-full justify-end">
+    <nav class="flex p-4 gap-2 text-amber-50 w-full justify-end pb-28">
       <div>
         <a routerLink="/">Home</a>
       </div>
