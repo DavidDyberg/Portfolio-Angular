@@ -16,15 +16,18 @@ type projectType = {
   imports: [],
   template: `
     <h1 class="text-amber-50">My project component</h1>
-    @for (project of projects; track project._id) {
-    <div>
-      <h2 class="text-amber-50">{{ project.title }}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      @for (project of projects; track project._id) {
+      <div class="w-full flex flex-col gap-4">
+        <h2 class="text-amber-50">{{ project.title }}</h2>
+        <img src="/project-placeholder-image.png" alt="" />
+      </div>
+      } @empty {
+      <p>There are no projects at the moment</p>
+      } @if (loading) {
+      <p>Loading...</p>
+      }
     </div>
-    } @empty {
-    <p>There are no projects at the moment</p>
-    } @if (loading) {
-    <p>Loading...</p>
-    }
   `,
 })
 export class ProjectComponent implements OnInit {
