@@ -8,12 +8,14 @@ import { projectType } from '../../../types/projectTypes';
     <h1 class="text-amber-50 text-3xl">My projects:</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 m-4">
       @for (project of projects; track project._id) {
-      <div class="w-full flex flex-col gap-4">
-        <h2 class="text-amber-50 text-2xl">
-          {{ project.title }}
-        </h2>
-        <img src="/project-placeholder-image.png" alt="" />
-      </div>
+      <a href="/projects/{{ project._id }}">
+        <div class="w-full flex flex-col gap-4">
+          <h2 class="text-amber-50 text-2xl">
+            {{ project.title }}
+          </h2>
+          <img src="/project-placeholder-image.png" alt="" />
+        </div>
+      </a>
       } @empty {
       <p>There are no projects at the moment</p>
       } @if (loading) {
