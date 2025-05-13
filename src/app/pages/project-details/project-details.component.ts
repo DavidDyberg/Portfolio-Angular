@@ -6,7 +6,45 @@ import { ProjectsService } from '../../services/projects.service';
 @Component({
   selector: 'app-project-details',
   imports: [],
-  template: ` <p class="text-amber-50">Project details page</p> `,
+  template: `
+    @if (project) {
+    <div class="flex justify-between">
+      <h2 class="text-amber-50 text-3xl">{{ project.title }}</h2>
+      <div class="flex gap-4">
+        <button class="text-amber-50">Edit</button>
+        <button class="text-amber-50">Delete</button>
+      </div>
+    </div>
+    <div class="pt-8">
+      <img
+        class="w-full h-96 object-cover rounded-lg "
+        src="/project-placeholder-image.png"
+        alt="Project image"
+      />
+      <div class="pt-5">
+        <p class="text-amber-50">{{ project.description }}</p>
+        <p class="text-amber-50 font-light text-lg pt-6">Technologies used:</p>
+        <ul class="text-amber-50 pl-6">
+          @for (techStack of project.techStack; track techStack) {
+          <li class="list-disc">{{ techStack }}</li>
+          }
+        </ul>
+        <div class="flex gap-4 pt-6 pb-6">
+          <div>
+            <a class="text-amber-50 font-bold" href="{{ project.liveDemo }}"
+              >Link to live project</a
+            >
+          </div>
+          <div>
+            <a class="text-amber-50 font-bold" href="{{ project.githubLink }}"
+              >Link to source code</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  `,
 })
 export class ProjectDetailsComponent implements OnInit {
   project: projectType | null = null;

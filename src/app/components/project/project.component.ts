@@ -13,7 +13,7 @@ import { projectType } from '../../../types/projectTypes';
           <h2 class="text-amber-50 text-2xl">
             {{ project.title }}
           </h2>
-          <img src="/project-placeholder-image.png" alt="" />
+          <img src="/project-placeholder-image.png" alt="Project image" />
         </div>
       </a>
       } @empty {
