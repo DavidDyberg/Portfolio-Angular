@@ -7,17 +7,31 @@ import { ProjectsService } from '../../services/projects.service';
   selector: 'app-project-details',
   imports: [],
   template: `
+    <a
+      href="/projects"
+      class="text-amber-50  rounded-full cursor-pointer underline"
+    >
+      <- Back
+    </a>
     @if (project) {
     <div class="flex justify-between">
       <h2 class="text-amber-50 text-3xl">{{ project.title }}</h2>
       <div class="flex gap-4">
-        <button class="text-amber-50">Edit</button>
-        <button class="text-amber-50">Delete</button>
+        <button
+          class="pr-4 pl-4 bg-cyan-400 hover:bg-cyan-300 rounded-full cursor-pointer"
+        >
+          Edit
+        </button>
+        <button
+          class="text-amber-50 pr-4 pl-4 bg-red-700 hover:bg-red-600 rounded-full cursor-pointer"
+        >
+          Delete
+        </button>
       </div>
     </div>
     <div class="pt-8">
       <img
-        class="w-full h-96 object-cover rounded-lg "
+        class="w-full h-96 object-cover rounded-lg"
         src="/project-placeholder-image.png"
         alt="Project image"
       />
@@ -31,12 +45,18 @@ import { ProjectsService } from '../../services/projects.service';
         </ul>
         <div class="flex gap-4 pt-6 pb-6">
           <div>
-            <a class="text-amber-50 font-bold" href="{{ project.liveDemo }}"
+            <a
+              class="text-amber-50 font-bold underline"
+              href="{{ project.liveDemo }}"
+              target="_blank"
               >Link to live project</a
             >
           </div>
           <div>
-            <a class="text-amber-50 font-bold" href="{{ project.githubLink }}"
+            <a
+              class="text-amber-50 font-bold underline"
+              href="{{ project.githubLink }}"
+              target="_blank"
               >Link to source code</a
             >
           </div>
