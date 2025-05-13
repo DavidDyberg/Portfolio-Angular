@@ -1,16 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from '../../services/projects.service';
-
-type projectType = {
-  _id: string;
-  title: string;
-  description: string;
-  image?: string;
-  techStack?: string[];
-  githubLink?: string;
-  liveDemo?: string;
-};
-
+import { projectType } from '../../../types/projectTypes';
 @Component({
   selector: 'app-project',
   imports: [],

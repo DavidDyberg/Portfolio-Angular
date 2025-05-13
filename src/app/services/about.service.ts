@@ -1,22 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, of } from 'rxjs';
-
-type AboutType = {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  age?: number;
-  bio?: string;
-  phoneNumber?: string;
-  profileImage?: string;
-  skills?: string[];
-  socials?: {
-    platformLogo?: string;
-    url?: string;
-  }[];
-};
-
+import { AboutType } from '../../types/aboutType';
 @Injectable({
   providedIn: 'root',
 })

@@ -1,16 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-type projectType = {
-  _id: string;
-  title: string;
-  description: string;
-  image?: string;
-  techStack?: string[];
-  githubLink?: string;
-  liveDemo?: string;
-};
+import { projectType } from '../../types/projectTypes';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +13,9 @@ export class ProjectsService {
 
   getProjects(): Observable<projectType[]> {
     return this.http.get<projectType[]>(this.apiUrl);
+  }
+
+  getProjectById(id: string): Observable<projectType> {
+    return this.http.get<projectType>(`${this.apiUrl}/${id}`);
   }
 }
