@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { projectType } from '../../../types/projectTypes';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from '../../services/projects.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-details',
@@ -24,6 +25,7 @@ import { ProjectsService } from '../../services/projects.service';
         </button>
         <button
           class="text-amber-50 pr-4 pl-4 bg-red-700 hover:bg-red-600 rounded-full cursor-pointer"
+          (click)="handleDeleteProject()"
         >
           Delete
         </button>
@@ -71,10 +73,15 @@ export class ProjectDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.loadProject();
+  }
+
+  loadProject(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.projectsService.getProjectById(id).subscribe({
@@ -84,6 +91,20 @@ export class ProjectDetailsComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error fetching project:', error);
+        },
+      });
+    }
+  }
+
+  handleDeleteProject(): void {
+    if (this.project && this.project._id) {
+      this.projectsService.deleteProject(this.project._id).subscribe({
+        next: () => {
+          console.log('Project deleted successfully');
+          this.router.navigate(['/projects']);
+        },
+        error: (error) => {
+          console.error('Error deleting project:', error);
         },
       });
     }

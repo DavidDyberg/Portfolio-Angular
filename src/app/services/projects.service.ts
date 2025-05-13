@@ -21,4 +21,8 @@ export class ProjectsService {
   addProject(project: Partial<projectType>): Observable<projectType> {
     return this.http.post<projectType>(this.apiUrl, project);
   }
+
+  deleteProject(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
