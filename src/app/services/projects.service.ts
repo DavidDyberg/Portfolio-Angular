@@ -22,6 +22,13 @@ export class ProjectsService {
     return this.http.post<projectType>(this.apiUrl, project);
   }
 
+  updateProject(
+    id: string,
+    project: Partial<projectType>
+  ): Observable<projectType> {
+    return this.http.put<projectType>(`${this.apiUrl}/${id}`, project);
+  }
+
   deleteProject(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
