@@ -3,10 +3,11 @@ import { projectType } from '../../../types/projectTypes';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectsService } from '../../services/projects.service';
 import { Router } from '@angular/router';
+import { EditProjectModalComponent } from '../../components/edit-project-modal-component';
 
 @Component({
   selector: 'app-project-details',
-  imports: [],
+  imports: [EditProjectModalComponent],
   template: `
     <a
       href="/projects"
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
       <h2 class="text-amber-50 text-3xl">{{ project.title }}</h2>
       <div class="flex gap-4">
         <button
+          (click)="showModal = true"
           class="pr-4 pl-4 bg-cyan-400 hover:bg-cyan-300 rounded-full cursor-pointer"
         >
           Edit
@@ -65,11 +67,20 @@ import { Router } from '@angular/router';
         </div>
       </div>
     </div>
-    }
+
+    @if (showModal) {
+    <app-edit-project-modal
+      [open]="showModal"
+      [project]="project!"
+      (save)="handleEditProject($event)"
+      (cancel)="handleEditCancel()"
+    />
+    } }
   `,
 })
 export class ProjectDetailsComponent implements OnInit {
   project: projectType | null = null;
+  showModal = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -108,5 +119,23 @@ export class ProjectDetailsComponent implements OnInit {
         },
       });
     }
+  }
+
+  handleEditProject(updatedData: Partial<projectType>) {
+    if (!this.project?._id) return;
+    this.projectsService
+      .updateProject(this.project._id, updatedData)
+      .subscribe({
+        next: (updatedProject) => {
+          this.project = updatedProject;
+          this.loadProject();
+          this.showModal = false;
+        },
+        error: (err) => console.error('Edit failed', err),
+      });
+  }
+
+  handleEditCancel() {
+    this.showModal = false;
   }
 }
